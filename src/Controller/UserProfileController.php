@@ -736,7 +736,7 @@ class UserProfileController extends UserController
         Capsule::transaction(function () use ($data, $user, $currentUser) {
             // Update the user and generate success messages
             foreach ($data as $name => $value) {
-                if ($value != $user->$name) {
+                if (property_exists($user, $name) && $value != $user->$name) {
                     $user->$name = $value;
                 }
             }
